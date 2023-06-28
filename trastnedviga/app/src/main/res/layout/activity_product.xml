@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Users.ProductActivity"
+    android:background="@drawable/kartinka3">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#C6292F3F"
+        >
+    </ImageView>
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/itemmag_cnt"
+        android:backgroundTintMode="multiply"
+        android:clickable="true"
+        android:elevation="20dp"
+        android:outlineSpotShadowColor="@color/black"
+        android:theme="@style/Material.Widget.FloatingActionButton.Mini.Light"
+
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:liftOnScroll="true">
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageButton
+            android:id="@+id/btnnax"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignStart="@+id/title_of_product_rent"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="-60dp"
+            android:layout_marginTop="10dp"
+            android:background="#00FFFFFF"
+            android:foregroundGravity="center"
+            android:src="@drawable/abc_vector_test"
+            android:tint="#000000">
+
+        </ImageButton>
+
+
+        <TextView
+            android:id="@+id/title_of_product_rent"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="50dp"
+            android:paddingEnd="60dp"
+            android:layout_marginEnd="0dp"
+            android:elegantTextHeight="false"
+            android:fontFamily="monospace"
+            android:hapticFeedbackEnabled="false"
+            android:text="Заголовок обьявления"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+
+            android:gravity="center"
+            android:textStyle="normal|bold"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </RelativeLayout>
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+
+
+
+
+
+    <ScrollView
+        android:id="@+id/scroll_prod"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:scrollbarStyle="insideOverlay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        android:layout_marginBottom="50dp">
+
+        <com.rey.material.widget.LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+
+
+                <com.rey.material.widget.ImageView
+                    android:id="@+id/product_rent_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="15dp"
+                    android:src="@drawable/menu"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    />
+
+
+            <RelativeLayout
+                android:layout_marginTop="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+
+                <RelativeLayout
+                    android:id="@+id/syka"
+                    android:outlineSpotShadowColor="#03A9F1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:alpha="0.80"
+                    android:background="@drawable/prodstyle_up">
+
+                    <TextView
+                        android:id="@+id/description_of_product_rent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Описание аренды или продажи"
+
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:textStyle="italic"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/narty"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/syka"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+
+                    android:layout_marginEnd="5dp"
+                    android:alpha="0.80"
+                    android:background="@drawable/prodstyle_bot"
+                    android:outlineSpotShadowColor="#03A9F1">
+
+                    <TextView
+                        android:id="@+id/cost_of_product_rent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:foregroundGravity="center"
+                        android:foregroundTint="#0C0C0C"
+                        android:gravity="center"
+                        android:shadowColor="#0E0E0E"
+                        android:text="Стоимость услуги - 5000$"
+                        android:textAllCaps="false"
+                        android:textColor="#000000"
+                        android:textColorHighlight="#101010"
+                        android:textColorHint="#0C0C0C"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+
+                </RelativeLayout>
+
+
+
+        </RelativeLayout>
+
+
+        </com.rey.material.widget.LinearLayout>
+
+    </ScrollView>
+
+
+    <com.rey.material.widget.Button
+        android:id="@+id/contprod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+
+
+        android:background="@drawable/roundet_bac"
+        android:text="Нашли ошибку"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+
+        tools:ignore="MissingConstraints" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

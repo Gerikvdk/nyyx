@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/kartinka3"
+    android:orientation="vertical"
+    tools:context=".ui.Users.ContactActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#B7292F3F"></ImageView>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorNoteColor3">
+
+    </ImageView>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/slogan1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        app:cardBackgroundColor="#373E4E"
+        android:layout_marginTop="-15dp"
+
+        android:elevation="20dp"
+        android:outlineSpotShadowColor="@color/black"
+        >
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/slogan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/candal"
+            android:gravity="center"
+            android:singleLine="false"
+            android:text="Наши контакты"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/white"
+        app:srcCompat="@drawable/log_out"
+        android:outlineSpotShadowColor="#03A9F1"
+        android:alpha="0.7"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/web"
+        android:layout_width="170dp"
+        android:layout_height="160dp"
+        android:layout_below="@+id/potop"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="20dp"
+        app:cardElevation="5dp"
+        android:outlineSpotShadowColor="#03A9F1"
+
+        app:cardCornerRadius="20dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/mtrl_list_item1"
+                android:src="@drawable/ic_baseline_web_24"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="30dp"
+                android:background="#373E4E"
+                app:tint="#FFFFFF"
+                />
+
+            <TextView
+                android:id="@+id/mtrl_list_itm_tx"
+                android:text="Наш сайт"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:background="@drawable/itemmag_bot"
+                android:gravity="center"
+                android:textColor="#FDFDFD"
+                android:textColorHighlight="@color/white"
+                android:textSize="15sp"
+                />
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/potop"
+        android:layout_width="170dp"
+        android:layout_height="160dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@id/slogan1"
+        app:cardElevation="5dp"
+        android:outlineSpotShadowColor="#03A9F1"
+        app:cardCornerRadius="20dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/mtrl_list_itm1"
+                android:src="@drawable/_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="30dp"
+                android:background="#373E4E"
+                app:tint="#FFFFFF" />
+
+
+            <TextView
+                android:id="@+id/mtrl_list_it_tx"
+
+                android:text="Почта"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:background="@drawable/itemmag_bot"
+                android:gravity="center"
+                android:textColor="#FDFDFD"
+                android:textColorHighlight="@color/white"
+                android:textSize="15sp"
+
+
+
+
+                />
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/smart"
+        android:layout_width="170dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="35dp"
+        android:checkable="false"
+        android:layout_below="@id/slogan1"
+        android:clipChildren="false"
+        android:fadingEdge="horizontal|vertical|none"
+        android:soundEffectsEnabled="false"
+        android:splitMotionEvents="false"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        android:outlineSpotShadowColor="#03A9F1"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="false">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/mtrl_list_item_icon11"
+                android:src="@drawable/phone_24"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="30dp"
+                android:background="#373E4E"
+                app:tint="#FFFFFF"
+
+                />
+
+            <TextView
+                android:id="@+id/mtrl_list_item_tx"
+                android:text="Телефон."
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="0dp"
+                android:background="@drawable/itemmag_bot"
+                android:gravity="center"
+
+                android:textColor="#FDFDFD"
+                android:textColorHighlight="@color/white"
+                android:textSize="15sp"
+                 />
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/inst"
+        android:layout_width="170dp"
+        android:layout_height="160dp"
+        android:layout_below="@+id/smart"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="35dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        android:outlineSpotShadowColor="#03A9F1">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/mtrl_list_item_icon1"
+                android:src="@drawable/baseline_image_24"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="30dp"
+                android:background="#373E4E"
+                app:tint="#FFFFFF"/>
+
+            <TextView
+            android:id="@+id/mtrl_list_item_text1"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="0dp"
+                android:background="@drawable/itemmag_bot"
+                android:gravity="center"
+                android:text="Инстаграм"
+                android:textColor="#FDFDFD"
+                android:textColorHighlight="@color/white"
+                android:textSize="15sp"
+                 />
+
+            <TextView
+                android:id="@+id/mtrl_list_item_tex"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/mtrl_list_item_icon1"
+                android:layout_marginStart="40dp"
+                android:backgroundTint="#F6F1F1"
+                android:paddingVertical="15dp"
+                android:paddingEnd="16dp"
+                android:text="Instagram"
+                android:textColor="#070707"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/location"
+        android:layout_width="170dp"
+        android:layout_height="160dp"
+        android:layout_below="@+id/inst"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="35dp"
+
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        android:outlineSpotShadowColor="#03A9F1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/mtrl_list_i"
+                android:src="@drawable/ic_baseline_map_24"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="30dp"
+                android:background="#373E4E"
+                app:tint="#FFFFFF"/>
+
+            <TextView
+                android:id="@+id/mtrl_list_tem_tex"
+                android:text="Наши филиалы"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:background="@drawable/itemmag_bot"
+                android:gravity="center"
+                android:textColor="#FDFDFD"
+                android:textColorHighlight="@color/white"
+                android:textSize="15sp"/>
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>

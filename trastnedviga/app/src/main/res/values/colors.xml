@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFFFFF</color>
+    <color name="purple_500">#020202</color>
+    <color name="purple_700">#020202</color>
+    <color name="teal_200">#201F1F</color>
+    <color name="teal_700">#252929</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="Red">#FF0000</color>
+    <color name="RED">#FF0001</color>
+
+    <color name="colorNoteColor2">#FDBE3B</color>
+    <color name="colorNoteColor3">#FF4842</color>
+    <color name="colorNoteColor5"><shape xmlns:android="http://schemas.android.com/apk/res/android"
+        android:shape="rectangle">
+        <gradient android:startColor="#654EA3" android:endColor="#EAAFC8" android:type="linear"></gradient>
+
+
+
+
+    </shape></color>
+</resources>

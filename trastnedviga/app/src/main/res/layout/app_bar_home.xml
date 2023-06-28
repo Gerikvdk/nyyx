@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/seach"
+    style="@style/Widget.AppCompat.Light.SearchView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Users.HomeActivity">
+
+
+    <include
+        android:id="@+id/secInclude"
+        layout="@layout/content_home" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:outlineSpotShadowColor="#03A9F1"
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:backgroundTint="#00AC83"
+        android:alpha="0.8"
+        app:layout_anchorGravity="end|center"
+        app:srcCompat="@drawable/phone_24"
+        />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

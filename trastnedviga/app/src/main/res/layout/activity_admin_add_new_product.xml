@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Admin.AdminAddNewProductActivity"
+    android:scrollbars="vertical"
+    android:background="@drawable/kartinka">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#B7292F3F">
+
+    </ImageView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="20dp"
+                    android:outlineSpotShadowColor="@color/black"
+                    app:cardElevation="20dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="25dp"
+                    app:cardCornerRadius="7dp"
+
+
+                    >
+
+                <com.rey.material.widget.ImageView
+                    android:id="@+id/select_product_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+
+
+                    android:src="@drawable/gallery" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <RelativeLayout
+                    android:id="@+id/card90"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/itemmaga_up"
+                    android:layout_marginTop="25dp"
+                    android:layout_below="@id/cardd"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+
+                        android:id="@+id/product_name"
+                        android:layout_width="400dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="#FCFDFD"
+                        android:textColorHighlight="#FFFFFF"
+                        android:textColorHint="#FFFFFF"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:backgroundTint="@color/purple_200"
+                        android:hint="Наименование обьявления"
+                        android:inputType="textMultiLine"
+                        android:outlineAmbientShadowColor="@color/purple_200"
+                        android:padding="10dp" />
+
+
+                </RelativeLayout>
+
+
+
+
+                    <RelativeLayout
+                        android:id="@+id/card2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/card90"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/itemmag_cnt"
+
+                        >
+
+
+
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/product_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="#FCFDFD"
+                            android:textColorHighlight="#FFFFFF"
+                            android:textColorHint="#FFFFFF"
+                            android:backgroundTint="#ECE7E7"
+                            android:hint="Описание"
+                            android:inputType="textMultiLine"
+                            android:padding="10dp" />
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/card3"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/card2"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/itemmag_bot"
+                        android:elevation="10dp"
+                        android:outlineSpotShadowColor="@color/black">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/product_price"
+                            android:layout_width="397dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginRight="20dp"
+                            android:textColor="#FCFDFD"
+                            android:textColorHighlight="#FFFFFF"
+                            android:textColorHint="#FFFFFF"
+
+                            android:backgroundTint="@color/purple_200"
+                            android:hint="Дата"
+                            android:inputType="textMultiLine"
+                            android:padding="10dp" />
+
+                    </RelativeLayout>
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card5"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_below="@+id/card3"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:elevation="10dp"
+                        android:outlineSpotShadowColor="@color/black"
+                        android:visibility="invisible"
+                        app:cardBackgroundColor="#F3F3F3"
+                        app:cardCornerRadius="20dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/product_loc"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginRight="20dp"
+                            android:backgroundTint="#C86767"
+                            android:hint="Улица"
+                            android:inputType="textMultiLine"
+                            android:padding="10dp"
+                            android:visibility="invisible" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                <com.rey.material.widget.Button
+                    android:id="@+id/btn_add_new_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_below="@+id/card3"
+
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="-28dp"
+                    android:layout_marginBottom="44dp"
+                    android:background="@drawable/roundet_bac"
+                    android:backgroundTintMode="multiply"
+
+                    android:breakStrategy="high_quality"
+                    android:drawableTint="#FDFDFD"
+                    android:drawableTintMode="multiply"
+                    android:foregroundTint="#ECE4E4"
+                    android:selectAllOnFocus="false"
+                    android:text="Добавить товар"
+                    android:textAllCaps="false"
+                    android:textColor="#F6F5F5"
+                    android:textSize="22dp"></com.rey.material.widget.Button>
+
+
+            </RelativeLayout>
+</LinearLayout>
+</ScrollView>
+
+    </RelativeLayout>

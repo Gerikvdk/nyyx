@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Admin.AdminCategoryActivity"
+    android:background="@drawable/kartinka3">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#B7292F3F"
+        >
+    </ImageView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/slogan1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        android:layout_marginTop="-15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+                >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/itemmag_cnt">
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/slogan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/candal"
+        android:gravity="center"
+        android:singleLine="false"
+        android:text="Выберите действие"
+        android:textColor="@color/purple_200"
+        android:textSize="25sp"
+         />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/adm_card1"
+        android:layout_width="170dp"
+        android:layout_height="160dp"
+        android:layout_below="@+id/slogan1"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:cardElevation="5dp"
+        android:outlineSpotShadowColor="#03A9F1"
+
+
+
+
+        app:cardCornerRadius="20dp">
+        <TextView
+            android:id="@+id/edit_text"
+            android:background="@drawable/itemmag_bot"
+
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_below="@+id/redact"
+            android:text="Создать пост"
+            android:textColorHighlight="@color/white"
+            android:gravity="center"
+
+            android:layout_gravity="bottom"
+            android:textColor="#FDFDFD"
+            android:textSize="15sp"
+            >
+
+        </TextView>
+
+
+        <ImageView
+            android:id="@+id/redact"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="30dp"
+            android:background="#373E4E"
+            android:src="@drawable/ic_baseline_post_add_24"
+            app:tint="#FFFFFF"></ImageView>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/adm_card7"
+        android:layout_width="170dp"
+        android:layout_height="160dp"
+        android:layout_below="@+id/adm_card1"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:cardElevation="5dp"
+
+
+        android:outlineSpotShadowColor="#03A9F1"
+
+        app:cardCornerRadius="20dp">
+
+
+
+            <ImageView
+                android:id="@+id/zapusk"
+                android:layout_marginBottom="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:background="#373E4E"
+                android:src="@drawable/ic_baseline_home_work_24"
+                app:tint="#FFFFFF"></ImageView>
+
+            <TextView
+                android:id="@+id/edzap"
+                android:layout_below="@+id/zapusk"
+                android:text="..."
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:textColor="@color/white"
+                android:background="@drawable/itemmag_bot"
+                android:gravity="center"
+                android:layout_gravity="bottom"
+                android:textSize="15sp"
+                >
+
+            </TextView>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/adm_card2"
+        android:layout_width="170dp"
+        android:layout_height="160dp"
+        android:layout_below="@+id/slogan1"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+
+
+        app:cardElevation="5dp"
+
+
+        android:outlineSpotShadowColor="#03A9F1"
+        app:cardCornerRadius="20dp">
+
+
+
+
+            <ImageView
+                android:id="@+id/r_btn"
+
+                android:layout_marginBottom="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:background="#373E4E"
+                android:src="@drawable/looo"
+                app:tint="#FFFFFF"></ImageView>
+
+            <TextView
+                android:id="@+id/editloo"
+                android:layout_below="@+id/r_btn"
+                android:text="Посмотреть обьявления"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:textColor="@color/white"
+                android:background="@drawable/itemmag_bot"
+                android:gravity="center"
+                android:layout_gravity="bottom"
+                android:textSize="14sp"
+                >
+
+            </TextView>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/adm_card3"
+        android:layout_width="170dp"
+        android:layout_height="160dp"
+        android:layout_below="@+id/adm_card5"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:outlineSpotShadowColor="#03A9F1"
+
+
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp">
+
+
+        <ImageView
+            android:id="@+id/cvest"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="30dp"
+            android:background="#373E4E"
+            android:src="@drawable/ic_baseline_control_point_24"
+            app:tint="#FFFFFF"></ImageView>
+
+        <TextView
+            android:id="@+id/cvest_one"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+
+            android:layout_below="@+id/cvest"
+            android:layout_gravity="bottom"
+            android:background="@drawable/itemmag_bot"
+            android:gravity="center"
+            android:text="Здесь может быть ваша идея (Inst)"
+            android:textColor="@color/white"
+            android:textSize="14sp">
+
+        </TextView>
+
+    </com.google.android.material.card.MaterialCardView><com.google.android.material.card.MaterialCardView
+        android:id="@+id/adm_card5"
+        android:layout_width="170dp"
+        android:layout_height="160dp"
+        android:layout_below="@+id/adm_card7"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:cardElevation="5dp"
+        android:outlineSpotShadowColor="#03A9F1"
+        app:cardCornerRadius="20dp">
+
+
+            <ImageView
+                android:id="@+id/mapimg"
+                android:src="@drawable/id_card"
+                android:layout_marginBottom="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:background="#373E4E"
+                app:tint="#FFFFFF"></ImageView>
+
+            <TextView
+                android:id="@+id/maptxt"
+                android:layout_below="@+id/mapimg"
+                android:text="Таблица участников"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:textColor="@color/white"
+                android:background="@drawable/itemmag_bot"
+                android:gravity="center"
+                android:layout_gravity="bottom"
+                android:textSize="15sp"
+                >
+
+            </TextView>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/adm_card4"
+        android:layout_width="170dp"
+        android:layout_height="160dp"
+        android:layout_below="@+id/adm_card6"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+
+
+        app:cardElevation="5dp"
+
+
+        android:outlineSpotShadowColor="#03A9F1"
+        app:cardCornerRadius="20dp">
+
+
+
+            <ImageView
+                android:id="@+id/inst_adm"
+                android:src="@drawable/_email"
+                android:layout_marginBottom="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:background="#373E4E"
+                app:tint="#FFFFFF"></ImageView>
+
+            <TextView
+                android:id="@+id/textinst"
+                android:layout_below="@+id/inst_adm"
+                android:layout_marginTop="10dp"
+                android:text="Присылайте свои предложения (Gmail)"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:textColor="@color/white"
+                android:background="@drawable/itemmag_bot"
+                android:gravity="center"
+                android:layout_gravity="bottom"
+                android:textSize="14sp"
+
+                >
+
+            </TextView>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/adm_card6"
+        android:layout_width="170dp"
+        android:layout_height="160dp"
+        android:layout_below="@+id/adm_card2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+
+
+        app:cardElevation="5dp"
+
+
+        android:outlineSpotShadowColor="#03A9F1"
+        app:cardCornerRadius="20dp">
+
+
+            <ImageView
+                android:id="@+id/priloch"
+
+                android:src="@drawable/ic_baseline_arrow_circle_down_24"
+
+                android:layout_marginBottom="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:background="#373E4E"
+                app:tint="#FFFFFF"></ImageView>
+
+            <TextView
+                android:id="@+id/teghj"
+                android:layout_below="@+id/priloch"
+                android:layout_marginTop="10dp"
+                android:text="... "
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:textColor="@color/white"
+                android:background="@drawable/itemmag_bot"
+                android:gravity="center"
+                android:layout_gravity="bottom"
+                android:textSize="14sp"
+                >
+
+            </TextView>
+
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>

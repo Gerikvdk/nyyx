@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view"
+    >
+
+    <group android:checkableBehavior="single">
+        <item
+
+            android:id="@+id/nav_home_arend"
+            android:icon="@drawable/baseline_language_24"
+            app:actionViewClass="android.widget.TextView"
+            android:outlineSpotShadowColor="#03A9F1"
+            android:title="Новости"
+            android:iconTint="@color/white"
+            />
+        <item
+            android:id="@+id/nav_home_buy"
+            android:icon="@drawable/custom_smart"
+            android:iconTint="@color/white"
+
+            android:title="Скидки"
+            app:actionViewClass="android.widget.TextView" />
+        <item
+            android:id="@+id/supp"
+            android:icon="@drawable/contact"
+            android:title="Контакты"
+            android:iconTint="@color/white"
+
+            />
+        <item
+            android:id="@+id/rozgr"
+            android:icon="@drawable/ic_baseline_post_add_24"
+            android:title="Розыгрыши"
+            android:iconTint="@color/white"
+
+            />
+        <item
+            android:id="@+id/nav_exit"
+            android:icon="@drawable/log_out"
+            android:title="Выход"
+            android:iconTint="@color/white"
+            />
+
+    </group>
+
+    
+</menu>

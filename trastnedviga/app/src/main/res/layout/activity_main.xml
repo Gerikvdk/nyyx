@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layayt"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/kartinka3"
+    tools:context=".ui.Users.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#C8292F3F">
+
+    </ImageView>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="350dp"
+        android:layout_marginBottom="200dp"
+        android:elevation="@dimen/app_bar_height"
+        android:layout_marginTop="70dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tytypo"
+        android:visibility="visible">
+
+    </ImageView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="22dp"
+        android:background="@drawable/anim_1"
+        android:outlineSpotShadowColor="#03A9F1"
+        app:cardBackgroundColor="#373E4E"
+        app:cardCornerRadius="20dp"
+
+        >
+
+        <com.rey.material.widget.Button
+
+            android:id="@+id/main_join_btn"
+            style="@style/ShapeAppearance.App.SmallComponent"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_above="@+id/main_login_btn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/roundet_bac"
+            android:backgroundTintMode="src_over"
+            android:drawableTint="#2967C5"
+            android:foregroundTint="#FFFFFF"
+            android:text="Регистрация"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="22dp">
+
+        </com.rey.material.widget.Button>
+
+        <com.rey.material.widget.Button
+            android:id="@+id/main_login_btn"
+            style="@style/ShapeAppearance.App.SmallComponent"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/roundet_bac"
+            android:text="Войти"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="22dp">
+
+        </com.rey.material.widget.Button>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="180dp"
+            android:gravity="center"
+            android:text="Войти через"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"></TextView>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="210dp"
+            android:background="#FFFFFF"
+
+            ></ImageView>
+
+
+        <com.rey.material.widget.Button
+            android:id="@+id/btn1"
+            style="@style/ShapeAppearance.App.SmallComponent"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="260dp"
+            android:layout_marginTop="220dp"
+            android:background="@drawable/instagram"
+            android:backgroundTintMode="src_over"
+            android:drawableTint="#2967C5"
+            android:foregroundTint="#FFFFFF"></com.rey.material.widget.Button>
+
+        <com.rey.material.widget.Button
+            android:id="@+id/btn2"
+            style="@style/ShapeAppearance.App.SmallComponent"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="220dp"
+            android:background="@drawable/vk"
+            android:backgroundTintMode="src_over"
+            android:drawableTint="#2967C5"
+            android:elevation="10dp"
+            android:foregroundTint="#FFFFFF"
+            android:outlineAmbientShadowColor="@color/black"></com.rey.material.widget.Button>
+
+        <com.rey.material.widget.Button
+            android:id="@+id/btn3"
+            style="@style/ShapeAppearance.App.SmallComponent"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="220dp"
+            android:background="@drawable/google"
+            android:backgroundTintMode="src_over"
+            android:drawableTint="#2967C5"
+            android:foregroundTint="#FFFFFF"></com.rey.material.widget.Button>
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
