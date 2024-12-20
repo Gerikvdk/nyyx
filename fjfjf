@@ -1,0 +1,27 @@
+WITH Selected_Departs AS (
+    SELECT Id, C_code, C_name
+    FROM Bi_view_departs_IBS_tree
+    WHERE C_code = :P1_DEPART_CODE
+    UNION ALL
+    SELECT d.Id, d.C_code, d.C_name
+    FROM Bi_view_departs_IBS_tree d
+    JOIN Selected_Departs sd ON d.Parent_id = sd.Id
+),
+Accessible_Pages AS (
+    SELECT DISTINCT bap.Page_id
+    FROM Bi_acc_depart_pages bap
+    JOIN Selected_Departs sd ON 
+        ':' || bap.Depart_code || ':' LIKE '%:' || sd.C_code || ':%'
+),
+Pages_With_User_Access AS (
+    SELECT DISTINCT ap.Page_id
+    FROM Accessible_Pages ap
+    JOIN Bi_acc_depart_pages bap ON ap.Page_id = bap.Page_id
+    JOIN Bi_validate_user_dep bud ON 
+        ':' || bap.Depart_code || ':' LIKE '%:' || bud.Depart_code || ':%'
+    WHERE bap.LDAP_login IS NOT NULL
+)
+SELECT bmp.Page_id, bmp.Page_name
+FROM Bi_portal_map_pages bmp
+WHERE bmp.Page_id IN (SELECT Page_id FROM Pages_With_User_Access)
+ORDER BY bmp.Page_name
