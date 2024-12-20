@@ -1,8 +1,11 @@
-WITH Selected_Departs AS (
-    SELECT C_code
+WITH RECURSIVE Selected_Departs AS (
+    SELECT Id, C_code, C_name
     FROM Bi_view_departs_IBS_tree
-    START WITH C_code = :P1_DEPART_CODE
-    CONNECT BY PRIOR Id = Parent_id
+    WHERE C_code = :P1_DEPART_CODE
+    UNION ALL
+    SELECT d.Id, d.C_code, d.C_name
+    FROM Bi_view_departs_IBS_tree d
+    JOIN Selected_Departs sd ON d.Parent_id = sd.Id
 ),
 Accessible_Pages AS (
     SELECT DISTINCT bap.Page_id
