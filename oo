@@ -1,0 +1,50 @@
+WITH recursive_departments AS (
+    SELECT 
+        d.id AS dept_id,
+        d.parent_id,
+        d.c_code AS dept_code,
+        1 AS hierarchy_level
+    FROM Bi_view_departs_IBS_tree d
+    WHERE :SELECTED_DEPARTMENT_ID IS NULL OR d.id = :SELECTED_DEPARTMENT_ID
+
+    UNION ALL
+
+    SELECT 
+        child.id,
+        child.parent_id,
+        child.c_code,
+        rd.hierarchy_level + 1
+    FROM Bi_view_departs_IBS_tree child
+    JOIN recursive_departments rd ON child.parent_id = rd.dept_id
+),
+department_users AS (
+    SELECT 
+        u.LDAP_login AS user_login,
+        u.depart_code AS user_depart_code
+    FROM Bi_validate_user_dep u
+    JOIN recursive_departments d ON u.depart_code = d.dept_code
+),
+accessible_pages AS (
+    SELECT DISTINCT 
+        p.page_id AS accessible_page_id
+    FROM Bi_acc_depart_pages p
+    INNER JOIN department_users u 
+        ON p.LDAP_login = u.user_login 
+        OR p.depart_code LIKE '%' || u.user_depart_code || '%'
+    WHERE 
+        u.user_login IS NOT NULL 
+        OR p.depart_code IS NOT NULL
+),
+filtered_pages AS (
+    SELECT 
+        p.page_id AS filtered_page_id
+    FROM Bi_portal_map_pages p
+    JOIN accessible_pages a ON p.page_id = a.accessible_page_id
+)
+SELECT DISTINCT 
+    p.page_id AS page_id, 
+    p.page_name AS page_name
+FROM Bi_portal_map_pages p
+WHERE :SELECTED_DEPARTMENT_ID IS NULL 
+   OR p.page_id IN (SELECT filtered_page_id FROM filtered_pages)
+ORDER BY p.page_name
