@@ -1,31 +1,34 @@
-WITH RECURSIVE Selected_Departs AS (
-    SELECT Id, C_code, C_name
-    FROM Bi_view_departs_IBS_tree
-    WHERE C_code = :P1_DEPART_CODE
-    UNION ALL
-    SELECT d.Id, d.C_code, d.C_name
-    FROM Bi_view_departs_IBS_tree d
-    JOIN Selected_Departs sd ON d.Parent_id = sd.Id
+WITH Hierarchy AS (
+    SELECT 
+        Id AS depart_id,
+        C_code,
+        Parent_id,
+        C_name,
+        LEVEL AS hierarchy_level
+    FROM 
+        Bi_view_departs_IBS_tree
+    START WITH 
+        C_code = :selected_depart_code  -- выбранный код департамента
+    CONNECT BY 
+        PRIOR Id = Parent_id
 ),
-Accessible_Pages AS (
-    SELECT DISTINCT bap.Page_id
-    FROM Bi_acc_depart_pages bap
-    JOIN Selected_Departs sd 
-      ON ':' || bap.Depart_code || ':' LIKE '%:' || sd.C_code || ':%'
-),
-Pages_With_User_Access AS (
-    SELECT DISTINCT bap.Page_id
-    FROM Bi_acc_depart_pages bap
-    JOIN Bi_validate_user_dep bud 
-      ON ':' || bap.Depart_code || ':' LIKE '%:' || bud.Depart_code || ':%'
-    WHERE bap.LDAP_login IS NOT NULL
+AccessiblePages AS (
+    SELECT DISTINCT 
+        p.Page_id,
+        p.Page_name
+    FROM 
+        Bi_portal_map_pages p
+    JOIN 
+        Bi_acc_depart_pages a ON p.Page_id = a.Page_id
+    JOIN 
+        Bi_validate_user_dep v ON a.Depart_code LIKE '%' || v.Depart_code || '%'
+    WHERE 
+        v.LDAP_login IN (SELECT LDAP_login FROM Bi_validate_user_dep WHERE Depart_code IN (SELECT C_code FROM Hierarchy))
 )
-SELECT bmp.Page_id, bmp.Page_name
-FROM Bi_portal_map_pages bmp
-WHERE bmp.Page_id IN (
-    SELECT ap.Page_id
-    FROM Accessible_Pages ap
-    JOIN Pages_With_User_Access pua 
-      ON ap.Page_id = pua.Page_id
-)
-ORDER BY bmp.Page_name
+SELECT 
+    ap.Page_id,
+    ap.Page_name
+FROM 
+    AccessiblePages ap
+ORDER BY 
+    ap.Page_name;
