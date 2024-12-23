@@ -6,11 +6,11 @@ RETURN SYS_REFCURSOR IS
     l_bind_dn      VARCHAR2(256) := 'CN=your_user,OU=Users,DC=example,DC=com'; -- Учетная запись для подключения
     l_password     VARCHAR2(256) := 'your_password'; -- Пароль
     l_ldap_conn    DBMS_LDAP.session;
-    l_search_ctx   DBMS_LDAP.search_result;
+    l_search_ctx   DBMS_LDAP.message; -- Результат поиска
     l_cursor       SYS_REFCURSOR;
-    l_entry        DBMS_LDAP.MESSAGE;
-    l_attr_value   VARCHAR2(4000);
     l_filter       VARCHAR2(256) := '(objectClass=organizationalUnit)'; -- Фильтр OU
+    l_entry        VARCHAR2(256);
+    l_attr_value   VARCHAR2(4000);
 BEGIN
     -- Подключение к серверу
     l_ldap_conn := DBMS_LDAP.init(l_ldap_host, l_ldap_port);
@@ -29,9 +29,9 @@ BEGIN
 
     -- Открытие курсора
     OPEN l_cursor FOR
-        SELECT entry,
-               DBMS_LDAP.get_values(l_ldap_conn, entry, 'ou') AS ou_name
-        FROM TABLE(l_search_ctx.entries);
+        SELECT DBMS_LDAP.get_dn(l_ldap_conn, l_search_ctx) AS dn,
+               DBMS_LDAP.get_values(l_ldap_conn, l_search_ctx, 'ou') AS ou_name
+        FROM DUAL;
 
     -- Закрытие соединения
     DBMS_LDAP.unbind_s(l_ldap_conn);
