@@ -1,0 +1,45 @@
+CREATE OR REPLACE FUNCTION get_ad_structure
+RETURN SYS_REFCURSOR IS
+    l_ldap_host    VARCHAR2(256) := 'ldap://your-ad-server.com'; -- Адрес LDAP
+    l_ldap_port    INTEGER := 389; -- Порт
+    l_base_dn      VARCHAR2(256) := 'DC=example,DC=com'; -- Корень структуры AD
+    l_bind_dn      VARCHAR2(256) := 'CN=your_user,OU=Users,DC=example,DC=com'; -- Учетная запись для подключения
+    l_password     VARCHAR2(256) := 'your_password'; -- Пароль
+    l_ldap_conn    DBMS_LDAP.session;
+    l_search_ctx   DBMS_LDAP.search_result;
+    l_cursor       SYS_REFCURSOR;
+    l_entry        DBMS_LDAP.MESSAGE;
+    l_attr_value   VARCHAR2(4000);
+    l_filter       VARCHAR2(256) := '(objectClass=organizationalUnit)'; -- Фильтр OU
+BEGIN
+    -- Подключение к серверу
+    l_ldap_conn := DBMS_LDAP.init(l_ldap_host, l_ldap_port);
+
+    -- Аутентификация
+    DBMS_LDAP.simple_bind_s(l_ldap_conn, l_bind_dn, l_password);
+
+    -- Поиск OU
+    l_search_ctx := DBMS_LDAP.search_s(
+        ld     => l_ldap_conn,
+        base   => l_base_dn,
+        scope  => DBMS_LDAP.SCOPE_SUBTREE,
+        filter => l_filter,
+        attrs  => NULL
+    );
+
+    -- Открытие курсора
+    OPEN l_cursor FOR
+        SELECT entry,
+               DBMS_LDAP.get_values(l_ldap_conn, entry, 'ou') AS ou_name
+        FROM TABLE(l_search_ctx.entries);
+
+    -- Закрытие соединения
+    DBMS_LDAP.unbind_s(l_ldap_conn);
+
+    RETURN l_cursor;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_LDAP.unbind_s(l_ldap_conn);
+        RAISE;
+END get_ad_structure;
+/
