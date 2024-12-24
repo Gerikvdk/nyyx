@@ -1,0 +1,10 @@
+CREATE OR REPLACE VIEW parsed_attributes AS
+SELECT 
+    d.id AS donor_id,
+    TRIM(REGEXP_SUBSTR(d.attributes, '[^:]+', 1, LEVEL)) AS attribute_value
+FROM 
+    donor_table d
+CONNECT BY 
+    PRIOR d.id = d.id AND 
+    PRIOR SYS_GUID() IS NOT NULL AND 
+    LEVEL <= REGEXP_COUNT(d.attributes, ':') + 1;
