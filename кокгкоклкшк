@@ -1,0 +1,56 @@
+/* Базовый стиль для иконки */
+.icon-with-text {
+    display: flex; /* Для выравнивания иконки и текста по линии */
+    align-items: center;
+}
+
+/* Стиль для самой иконки */
+.icon-with-text .icon {
+    font-family: "Font Awesome 5 Free"; /* Подключение библиотеки иконок */
+    font-weight: 900; /* Жирный вес для иконок (если используете Font Awesome) */
+    margin-right: 5px; /* Отступ между иконкой и текстом */
+}
+
+/* Разные стили для иконок */
+.icon-check {
+    color: green; /* Зелёная галочка */
+    content: "\f00c"; /* Unicode для Font Awesome (зеленая галочка) */
+}
+
+.icon-cross {
+    color: red; /* Красный крест */
+    content: "\f00d"; /* Unicode для Font Awesome (красный крест) */
+}
+
+/* Для hover или интерактивности */
+.icon-with-text:hover .icon {
+    opacity: 0.8; /* Лёгкий эффект прозрачности */
+}
+
+
+
+
+<div class="icon-with-text">
+    <span class="icon icon-check"></span>
+    Условие выполнено
+</div>
+
+<div class="icon-with-text">
+    <span class="icon icon-cross"></span>
+    Условие не выполнено
+</div>
+
+
+
+
+
+
+
+SELECT 
+    '<div class="icon-with-text">' || 
+    CASE 
+        WHEN some_condition = 'Y' THEN '<span class="icon icon-check"></span> Условие выполнено'
+        ELSE '<span class="icon icon-cross"></span> Условие не выполнено'
+    END || 
+    '</div>' AS card_content
+FROM your_table
