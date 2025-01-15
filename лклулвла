@@ -1,0 +1,11 @@
+SELECT 
+    card_primary_key,
+    card_title,
+    card_subtitle,
+    '<span class="icon ' || CASE 
+        WHEN status = 'Active' THEN 'icon-active'
+        WHEN status = 'Inactive' THEN 'icon-inactive'
+        ELSE 'icon-unknown'
+    END || '" aria-hidden="true"></span>' AS icon_html
+FROM 
+    your_table
