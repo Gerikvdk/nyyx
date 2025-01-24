@@ -1,0 +1,31 @@
+$(document).ready(function() {
+    var iframe = $('#customIframe');
+    var errorMessage = $('#iframeErrorMessage');
+
+    // Обработчик успешной загрузки iframe
+    iframe.on('load', function() {
+        // Для кросс-доменных iframe проверка содержимого может не сработать
+        try {
+            if (iframe.contents().length === 0) {
+                throw new Error('Пустой контент');
+            }
+        } catch (e) {
+            errorMessage.show();
+            iframe.hide();
+        }
+    });
+
+    // Обработчик ошибки загрузки iframe
+    iframe.on('error', function() {
+        errorMessage.show();
+        iframe.hide();
+    });
+
+    // Таймаут на случай, если iframe не ответил
+    setTimeout(function() {
+        if (iframe.is(':visible')) {
+            errorMessage.show();
+            iframe.hide();
+        }
+    }, 5000); // Таймаут 5 секунд
+});
