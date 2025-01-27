@@ -1,0 +1,33 @@
+CREATE OR REPLACE PROCEDURE sync_departments IS
+BEGIN
+    -- Обновление или вставка данных
+    MERGE INTO target_departments t
+    USING (
+        SELECT id, c_code, c_name, parent_id 
+        FROM BI_VIEW_DEPARTS_IDS_TREE
+    ) s
+    ON (t.c_code = s.c_code) -- Уникальный ключ
+    WHEN MATCHED THEN
+        UPDATE SET 
+            t.c_name = s.c_name,
+            t.parent_id = s.parent_id,
+            t.last_updated = SYSDATE
+    WHEN NOT MATCHED THEN
+        INSERT (id, c_code, c_name, parent_id)
+        VALUES (s.id, s.c_code, s.c_name, s.parent_id);
+
+    -- Удаление устаревших записей
+    DELETE FROM target_departments t
+    WHERE NOT EXISTS (
+        SELECT 1 
+        FROM BI_VIEW_DEPARTS_IDS_TREE v
+        WHERE v.c_code = t.c_code
+    );
+
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK;
+        RAISE;
+END;
+/
