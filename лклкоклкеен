@@ -1,0 +1,76 @@
+DECLARE
+    l_access NUMBER;  -- Переменная для хранения результата доступа
+BEGIN
+    -- Цикл по трем типам объектов: Пользователь (1), Роль (3), Подразделение (2)
+    FOR i IN 1..3 LOOP
+        -- Для каждого аттрибута выполняем соответствующие проверки:
+        CASE i
+            WHEN 1 THEN
+                -- 1-й запрос: Проверка доступа для пользователя
+                BEGIN
+                    SELECT acc
+                      INTO l_access
+                      FROM access_control
+                     WHERE object_type = 1  -- Тип объекта: пользователь
+                       AND object_id = :P1_USER_ID  -- ID пользователя
+                       AND page_id = :P1_PAGE_ID;  -- ID страницы
+                    
+                    -- Если доступ запрещен для пользователя (acc = 0), выводим NULL и выходим
+                    IF l_access = 0 THEN
+                        DBMS_OUTPUT.PUT_LINE('Доступ запрещён для пользователя. Итог: NULL');
+                        RETURN;
+                    END IF;
+                EXCEPTION
+                    WHEN NO_DATA_FOUND THEN
+                        -- Если записи не найдено, переходим к следующему запросу
+                        NULL;
+                END;
+
+            WHEN 2 THEN
+                -- 2-й запрос: Проверка доступа для роли
+                BEGIN
+                    SELECT acc
+                      INTO l_access
+                      FROM access_control
+                     WHERE object_type = 3  -- Тип объекта: роль
+                       AND object_id = :P1_ROLE_ID  -- ID роли
+                       AND page_id = :P1_PAGE_ID;  -- ID страницы
+                    
+                    -- Если доступ запрещен для роли (acc = 0), выводим NULL и выходим
+                    IF l_access = 0 THEN
+                        DBMS_OUTPUT.PUT_LINE('Доступ запрещён для роли. Итог: NULL');
+                        RETURN;
+                    END IF;
+                EXCEPTION
+                    WHEN NO_DATA_FOUND THEN
+                        -- Если записи не найдено, переходим к следующему запросу
+                        NULL;
+                END;
+
+            WHEN 3 THEN
+                -- 3-й запрос: Проверка доступа для подразделения
+                BEGIN
+                    SELECT acc
+                      INTO l_access
+                      FROM access_control
+                     WHERE object_type = 2  -- Тип объекта: подразделение
+                       AND object_id = :P1_DEPT_ID  -- ID подразделения
+                       AND page_id = :P1_PAGE_ID;  -- ID страницы
+                    
+                    -- Если доступ запрещен для подразделения (acc = 0), выводим NULL и выходим
+                    IF l_access = 0 THEN
+                        DBMS_OUTPUT.PUT_LINE('Доступ запрещён для подразделения. Итог: NULL');
+                        RETURN;
+                    END IF;
+                EXCEPTION
+                    WHEN NO_DATA_FOUND THEN
+                        -- Если записи не найдено, переходим к следующему запросу
+                        NULL;
+                END;
+        END CASE;
+    END LOOP;
+
+    -- Если не было запрещено, выводим итог, что доступ разрешён
+    DBMS_OUTPUT.PUT_LINE('Доступ разрешен. Итог: 1');
+END;
+/
