@@ -1,0 +1,66 @@
+DECLARE
+    l_access NUMBER := -1;  -- Инициализация переменной с дефолтным значением
+BEGIN
+    -- 1-й запрос: Проверка доступа для пользователя
+    BEGIN
+        SELECT acc
+          INTO l_access
+          FROM access_control
+         WHERE object_type = 1  -- Тип объекта: пользователь
+           AND object_id = :P1_USER_ID  -- ID пользователя
+           AND page_id = :P1_PAGE_ID;  -- ID страницы
+
+        -- Если доступ запрещен для пользователя (acc = 0), выводим NULL и выходим
+        IF l_access = 0 THEN
+            DBMS_OUTPUT.PUT_LINE('Доступ запрещён для пользователя. Итог: NULL');
+            -- Перенаправление на другую страницу
+            APEX_UTIL.REDIRECT_URL(p_url => 'f?p=&APP_ID.:2:&SESSION.');
+        END IF;
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            -- Если записи не найдено, переходим к следующему запросу
+            NULL;
+    END;
+
+    -- 2-й запрос: Проверка доступа для роли
+    BEGIN
+        SELECT acc
+          INTO l_access
+          FROM access_control
+         WHERE object_type = 3  -- Тип объекта: роль
+           AND object_id = :P1_ROLE_ID  -- ID роли
+           AND page_id = :P1_PAGE_ID;  -- ID страницы
+
+        -- Если доступ запрещен для роли (acc = 0), выводим NULL и выходим
+        IF l_access = 0 THEN
+            DBMS_OUTPUT.PUT_LINE('Доступ запрещён для роли. Итог: NULL');
+            -- Перенаправление на другую страницу
+            APEX_UTIL.REDIRECT_URL(p_url => 'f?p=&APP_ID.:2:&SESSION.');
+        END IF;
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            -- Если записи не найдено, переходим к следующему запросу
+            NULL;
+    END;
+
+    -- 3-й запрос: Проверка доступа для подразделения
+    BEGIN
+        SELECT acc
+          INTO l_access
+          FROM access_control
+         WHERE object_type = 2  -- Тип объекта: подразделение
+           AND object_id = :P1_DEPT_ID  -- ID подразделения
+           AND page_id = :P1_PAGE_ID;  -- ID страницы
+
+        -- Если доступ запрещен для подразделения (acc = 0), выводим NULL и выходим
+        IF l_access = 0 THEN
+            DBMS_OUTPUT.PUT_LINE('Доступ запрещён для подразделения. Итог: NULL');
+            -- Перенаправление на другую страницу
+            APEX_UTIL.REDIRECT_URL(p_url => 'f?p=&APP_ID.:2:&SESSION.');
+        END IF;
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            -- Если записи не найдено, переходим к следующему запросу
+            NULL;
+    END;
+END;
