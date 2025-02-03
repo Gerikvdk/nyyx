@@ -1,80 +1,72 @@
-DECLARE
-    v_result NUMBER := NULL;
+CREATE OR REPLACE FUNCTION check_auth_sequence 
+RETURN VARCHAR2 
+IS
+  v_result NUMBER;
 BEGIN
-    -- Проверяем ACC_USERS
-    BEGIN
-        SELECT acc INTO v_result 
-        FROM ACC_USERS
-        WHERE ROWNUM = 1;
+  -- Запрос 1
+  BEGIN
+    SELECT COUNT(*) INTO v_result 
+    FROM your_table_1 
+    WHERE your_condition_1;
+    
+    IF v_result = 1 THEN 
+      RETURN 'QUERY_1_SUCCESS'; -- Успех
+    ELSIF v_result = 0 THEN 
+      RETURN NULL; -- Прерывание
+    END IF;
+  EXCEPTION
+    WHEN NO_DATA_FOUND THEN 
+      NULL; -- Продолжить проверку
+  END;
 
-        IF v_result = 0 THEN
-            v_result := NULL;
-            DBMS_OUTPUT.PUT_LINE('Результат: ' || v_result);
-            RETURN;
-        ELSIF v_result = 1 THEN
-            DBMS_OUTPUT.PUT_LINE('Результат: ' || v_result);
-            RETURN;
-        END IF;
-    EXCEPTION
-        WHEN NO_DATA_FOUND THEN
-            v_result := NULL; -- Если нет данных, продолжаем к следующему
-    END;
+  -- Запрос 2
+  BEGIN
+    SELECT COUNT(*) INTO v_result 
+    FROM your_table_2 
+    WHERE your_condition_2;
+    
+    IF v_result = 1 THEN 
+      RETURN 'QUERY_2_SUCCESS';
+    ELSIF v_result = 0 THEN 
+      RETURN NULL;
+    END IF;
+  EXCEPTION
+    WHEN NO_DATA_FOUND THEN 
+      NULL;
+  END;
 
-    -- Проверяем ROLE_USERS
-    BEGIN
-        SELECT acc INTO v_result 
-        FROM ROLE_USERS
-        WHERE ROWNUM = 1;
+  -- Запрос 3
+  BEGIN
+    SELECT COUNT(*) INTO v_result 
+    FROM your_table_3 
+    WHERE your_condition_3;
+    
+    IF v_result = 1 THEN 
+      RETURN 'QUERY_3_SUCCESS';
+    ELSIF v_result = 0 THEN 
+      RETURN NULL;
+    END IF;
+  EXCEPTION
+    WHEN NO_DATA_FOUND THEN 
+      NULL;
+  END;
 
-        IF v_result = 0 THEN
-            v_result := NULL;
-            DBMS_OUTPUT.PUT_LINE('Результат: ' || v_result);
-            RETURN;
-        ELSIF v_result = 1 THEN
-            DBMS_OUTPUT.PUT_LINE('Результат: ' || v_result);
-            RETURN;
-        END IF;
-    EXCEPTION
-        WHEN NO_DATA_FOUND THEN
-            v_result := NULL;
-    END;
+  -- Запрос 4
+  BEGIN
+    SELECT COUNT(*) INTO v_result 
+    FROM your_table_4 
+    WHERE your_condition_4;
+    
+    IF v_result = 1 THEN 
+      RETURN 'QUERY_4_SUCCESS';
+    ELSIF v_result = 0 THEN 
+      RETURN NULL;
+    END IF;
+  EXCEPTION
+    WHEN NO_DATA_FOUND THEN 
+      NULL;
+  END;
 
-    -- Проверяем ROLE_DEPART
-    BEGIN
-        SELECT acc INTO v_result 
-        FROM ROLE_DEPART
-        WHERE ROWNUM = 1;
-
-        IF v_result = 0 THEN
-            v_result := NULL;
-            DBMS_OUTPUT.PUT_LINE('Результат: ' || v_result);
-            RETURN;
-        ELSIF v_result = 1 THEN
-            DBMS_OUTPUT.PUT_LINE('Результат: ' || v_result);
-            RETURN;
-        END IF;
-    EXCEPTION
-        WHEN NO_DATA_FOUND THEN
-            v_result := NULL;
-    END;
-
-    -- Проверяем DEPART
-    BEGIN
-        SELECT acc INTO v_result 
-        FROM DEPART
-        WHERE ROWNUM = 1;
-
-        IF v_result = 0 THEN
-            v_result := NULL;
-        ELSIF v_result = 1 THEN
-            DBMS_OUTPUT.PUT_LINE('Результат: ' || v_result);
-            RETURN;
-        END IF;
-
-        DBMS_OUTPUT.PUT_LINE('Результат: ' || v_result);
-    EXCEPTION
-        WHEN NO_DATA_FOUND THEN
-            v_result := NULL;
-            DBMS_OUTPUT.PUT_LINE('Результат: ' || v_result);
-    END;
-END; 
+  -- Все проверки провалены
+  RETURN NULL;
+END;
