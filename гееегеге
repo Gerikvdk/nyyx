@@ -1,72 +1,29 @@
-CREATE OR REPLACE FUNCTION check_auth_sequence 
-RETURN VARCHAR2 
+CREATE OR REPLACE FUNCTION check_auth_sequence (
+    p_app_user  IN VARCHAR2,
+    p_page_id   IN NUMBER
+) RETURN VARCHAR2 
 IS
   v_result NUMBER;
 BEGIN
-  -- Запрос 1
+  -- Запрос 1 (пример с использованием параметров)
   BEGIN
     SELECT COUNT(*) INTO v_result 
     FROM your_table_1 
-    WHERE your_condition_1;
-    
+    WHERE user_name = p_app_user -- :APP_USER из APEX
+      AND page_id = p_page_id;   -- Текущий PAGE_ID
+
     IF v_result = 1 THEN 
-      RETURN 'QUERY_1_SUCCESS'; -- Успех
+      RETURN 'QUERY_1_SUCCESS'; 
     ELSIF v_result = 0 THEN 
-      RETURN NULL; -- Прерывание
+      RETURN NULL; 
     END IF;
   EXCEPTION
     WHEN NO_DATA_FOUND THEN 
-      NULL; -- Продолжить проверку
+      NULL; 
   END;
 
-  -- Запрос 2
-  BEGIN
-    SELECT COUNT(*) INTO v_result 
-    FROM your_table_2 
-    WHERE your_condition_2;
-    
-    IF v_result = 1 THEN 
-      RETURN 'QUERY_2_SUCCESS';
-    ELSIF v_result = 0 THEN 
-      RETURN NULL;
-    END IF;
-  EXCEPTION
-    WHEN NO_DATA_FOUND THEN 
-      NULL;
-  END;
+  -- Аналогично для остальных запросов (Запрос 2, 3, 4)
+  -- ...
 
-  -- Запрос 3
-  BEGIN
-    SELECT COUNT(*) INTO v_result 
-    FROM your_table_3 
-    WHERE your_condition_3;
-    
-    IF v_result = 1 THEN 
-      RETURN 'QUERY_3_SUCCESS';
-    ELSIF v_result = 0 THEN 
-      RETURN NULL;
-    END IF;
-  EXCEPTION
-    WHEN NO_DATA_FOUND THEN 
-      NULL;
-  END;
-
-  -- Запрос 4
-  BEGIN
-    SELECT COUNT(*) INTO v_result 
-    FROM your_table_4 
-    WHERE your_condition_4;
-    
-    IF v_result = 1 THEN 
-      RETURN 'QUERY_4_SUCCESS';
-    ELSIF v_result = 0 THEN 
-      RETURN NULL;
-    END IF;
-  EXCEPTION
-    WHEN NO_DATA_FOUND THEN 
-      NULL;
-  END;
-
-  -- Все проверки провалены
   RETURN NULL;
 END;
