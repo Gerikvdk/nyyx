@@ -1,34 +1,38 @@
-WITH Hierarchy AS (
-    SELECT 
-        Id AS depart_id,
-        C_code,
-        Parent_id,
-        C_name,
-        LEVEL AS hierarchy_level
-    FROM 
-        Bi_view_departs_IBS_tree
-    START WITH 
-        C_code = :selected_depart_code  -- выбранный код департамента
-    CONNECT BY 
-        PRIOR Id = Parent_id
-),
-AccessiblePages AS (
-    SELECT DISTINCT 
-        p.Page_id,
-        p.Page_name
-    FROM 
-        Bi_portal_map_pages p
-    JOIN 
-        Bi_acc_depart_pages a ON p.Page_id = a.Page_id
-    JOIN 
-        Bi_validate_user_dep v ON a.Depart_code LIKE '%' || v.Depart_code || '%'
-    WHERE 
-        v.LDAP_login IN (SELECT LDAP_login FROM Bi_validate_user_dep WHERE Depart_code IN (SELECT C_code FROM Hierarchy))
-)
-SELECT 
-    ap.Page_id,
-    ap.Page_name
-FROM 
-    AccessiblePages ap
-ORDER BY 
-    ap.Page_name;
+DECLARE
+  v_page_group VARCHAR2(100);
+  v_result NUMBER;
+BEGIN
+  -- Получаем группу текущей страницы
+  SELECT PAGE_GROUP 
+  INTO v_page_group 
+  FROM APEX_APPLICATION_PAGES 
+  WHERE APPLICATION_ID = :APP_ID 
+    AND PAGE_ID = :APP_PAGE_ID;
+
+  -- Если страница в группе 'user interface', просто завершаем выполнение
+  IF v_page_group = 'user interface' THEN
+    RETURN;
+  END IF;
+
+  -- Если страница не в 'dashboard', сразу перенаправляем на 1020
+  IF v_page_group != 'dashboard' THEN
+    APEX_UTIL.REDIRECT_URL('f?p=&APP_ID.:1020:&SESSION.');
+    RETURN;
+  END IF;
+
+  -- Выполняем проверочный запрос, если страница в 'dashboard'
+  BEGIN
+    SELECT CHECK_AUTH_SEQUENCE(
+      p_app_user => :APP_USER,
+      p_page_id => :APP_PAGE_ID
+    ) INTO v_result FROM DUAL;
+
+    -- Если результат NULL, перенаправляем на 1020
+    IF v_result IS NULL THEN
+      APEX_UTIL.REDIRECT_URL('f?p=&APP_ID.:1020:&SESSION.');
+    END IF;
+  EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+      APEX_UTIL.REDIRECT_URL('f?p=&APP_ID.:1020:&SESSION.');
+  END;
+END;
