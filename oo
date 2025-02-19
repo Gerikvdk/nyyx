@@ -1,4 +1,8 @@
 window.addEventListener("beforeunload", function(event) {
-    var customEvent = new Event("beforePageExit");
-    document.dispatchEvent(customEvent);
+    if (!$v("P_VISIT_ID")) return; // Если нет VISIT_ID, ничего не делаем
+
+    var formData = new FormData();
+    formData.append("P_VISIT_ID", $v("P_VISIT_ID"));
+
+    navigator.sendBeacon("f?p=&APP_ID.:SAVE_VISIT_TIME:&SESSION.", formData);
 });
