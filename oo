@@ -1,6 +1,4 @@
-document.addEventListener("visibilitychange", function() {
-    if (document.visibilityState === "hidden") {
-        var event = new Event("beforePageExit");
-        document.dispatchEvent(event);
-    }
+window.addEventListener("beforeunload", function(event) {
+    var customEvent = new Event("beforePageExit");
+    document.dispatchEvent(customEvent);
 });
