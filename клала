@@ -1,0 +1,46 @@
+declare
+    v_session_id varchar2(100);
+    v_visit_id number;
+begin
+    v_session_id := :APP_SESSION;
+
+    -- Вставляем новую запись о начале посещения и получаем visit_id
+    insert into user_page_visits (user_id, page_name, visit_time, session_id)
+    values (
+        :APP_USER, 
+        :APP_PAGE_ID, 
+        current_timestamp,  -- Время посещения
+        v_session_id
+    )
+    returning visit_id into v_visit_id;  -- Сохраняем visit_id
+
+    -- Сохраняем visit_id в application item
+    :P_VISIT_ID := v_visit_id;
+end;
+
+declare
+    v_end_time date;
+begin
+    -- Получаем текущее время
+    v_end_time := current_timestamp;
+
+    -- Обновляем запись по конкретному visit_id
+    update user_page_visits
+    set end_visit_time = v_end_time
+    where visit_id = :P_VISIT_ID;  -- Используем сохраненный visit_id
+
+end;
+
+CREATE TABLE "USER_PAGE_VISITS" 
+   (  "VISIT_ID" NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  NOT NULL ENABLE, 
+  "USER_ID" VARCHAR2(50), 
+  "PAGE_NAME" VARCHAR2(100), 
+  "VISIT_TIME" DATE DEFAULT current_timestamp, 
+  "SESSION_ID" VARCHAR2(100), 
+  "DURATION" NUMBER, 
+  "END_VISIT_TIME" DATE, 
+   PRIMARY KEY ("VISIT_ID")
+  USING INDEX  ENABLE
+   ) ;
+
+P_VISIT_ID
