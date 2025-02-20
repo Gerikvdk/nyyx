@@ -1,8 +1,203 @@
-window.addEventListener("visibilitychange", function() {
-    if (document.visibilityState === "hidden") {
-        var formData = new FormData();
-        formData.append("P_VISIT_ID", $v("P_VISIT_ID"));
+Спасибо за доверие! Я подготовил две красивые карточки с учетом корпоративных цветов: зеленого и бежево-золотого. Эти карточки выглядят стильно и современно, отлично подойдут для корпоративного интерфейса.
 
-        navigator.sendBeacon("f?p=&APP_ID.:0:&SESSION.:APPLICATION_PROCESS=SAVE_VISIT_TIME", formData);
-    }
-});
+
+---
+
+Вариант 1: Элегантная карточка с градиентом и стеклянным эффектом (Glassmorphism)
+
+Современный и стильный дизайн с полупрозрачностью и размытием фона.
+
+HTML:
+
+<div class="card-container">
+    <div class="card">
+        <div class="card-icon">
+            <img src="https://example.com/icon.svg" alt="icon">
+        </div>
+        <div class="card-text">
+            <p class="card-title">Вход в систему</p>
+            <p class="card-subtitle">Используйте биометрию для безопасного входа</p>
+        </div>
+    </div>
+</div>
+
+CSS:
+
+/* Контейнер для центрирования */
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #0a3d2f, #166d4b);
+}
+
+/* Стиль карточки */
+.card {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 20px;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Иконка */
+.card-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-icon img {
+    width: 40px;
+    height: 40px;
+}
+
+/* Текст */
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.card-subtitle {
+    font-size: 14px;
+    color: #d4af6a; /* Бежево-золотой цвет */
+}
+
+Что делает карточку стильной?
+
+Полупрозрачный фон с размытием (эффект стекла).
+
+Градиентный фон в корпоративных цветах.
+
+Анимация при наведении для интерактивности.
+
+Бежево-золотой цвет в тексте для корпоративного стиля.
+
+
+
+---
+
+Вариант 2: Минималистичная карточка с золотыми акцентами и тенью
+
+Классический корпоративный стиль, строгий и дорогой дизайн.
+
+HTML:
+
+<div class="card-container">
+    <div class="card">
+        <div class="card-header">
+            <img src="https://example.com/icon.svg" alt="icon">
+        </div>
+        <div class="card-body">
+            <h3 class="card-title">Премиальный доступ</h3>
+            <p class="card-text">Быстрый и безопасный вход</p>
+        </div>
+        <div class="card-footer">
+            <button class="card-button">Войти</button>
+        </div>
+    </div>
+</div>
+
+CSS:
+
+/* Фон страницы */
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f1e5;
+}
+
+/* Карточка */
+.card {
+    background: #ffffff;
+    border-radius: 12px;
+    width: 320px;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-top: 4px solid #d4af6a; /* Золотая полоска сверху */
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Иконка */
+.card-header img {
+    width: 50px;
+    height: 50px;
+}
+
+/* Текст */
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0a3d2f;
+    margin: 10px 0;
+}
+
+.card-text {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Кнопка */
+.card-button {
+    background: #0a3d2f;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.card-button:hover {
+    background: #166d4b;
+}
+
+Что делает карточку стильной?
+
+Бежево-золотая полоска сверху для корпоративного вида.
+
+Чистый белый фон с мягкой тенью.
+
+Темно-зеленые элементы для контраста.
+
+Кнопка с эффектом при наведении.
+
+
+
+---
+
+Какой вариант лучше выбрать?
+
+1. Если нужен более современный, инновационный стиль, подойдет первый вариант с эффектом стекла (Glassmorphism).
+
+
+2. Если важен строгий и корпоративный дизайн, лучше выбрать второй вариант с золотыми акцентами и четкими границами.
+
+
+
+Оба дизайна можно адаптировать под ваш проект, добавляя анимации, иконки и другие элементы. Какой вариант вам больше нравится?
+
