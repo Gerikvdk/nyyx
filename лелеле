@@ -1,85 +1,99 @@
-Для логирования входа и выхода пользователей на страницы в Oracle APEX 23.1, можно использовать комбинацию динамических действий, встроенных процедур APEX и PL/SQL-кода.
+Хорошо, для логирования посещений страниц в Oracle APEX 23.1 без использования APEX_WORKSPACE_SESSIONS, можно использовать переменную V('APP_SESSION'), которая автоматически заполняется в APEX при входе пользователя.
 
-1. Создание таблицы для логирования
+1. Создание таблицы логов посещений
 
-Создайте таблицу для хранения логов:
+Создадим таблицу, где будем сохранять ID сессии (APP_SESSION), имя пользователя (APP_USER), номер страницы (APP_PAGE_ID), время входа и выхода:
 
 CREATE TABLE APEX_PAGE_ACCESS_LOG (
     log_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    session_id NUMBER,
-    user_name VARCHAR2(100),
-    page_id NUMBER,
-    access_time TIMESTAMP,
-    exit_time TIMESTAMP,
-    CONSTRAINT fk_apex_session FOREIGN KEY (session_id) REFERENCES APEX_WORKSPACE_SESSIONS(session_id)
+    session_id NUMBER NOT NULL,
+    user_name VARCHAR2(100) NOT NULL,
+    page_id NUMBER NOT NULL,
+    access_time TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    exit_time TIMESTAMP
 );
 
-2. Логирование входа на страницу
 
-Добавьте процесс Before Header на каждой странице:
+---
 
-INSERT INTO APEX_PAGE_ACCESS_LOG (session_id, user_name, page_id, access_time)
-VALUES (
-    V('APP_SESSION'), 
-    V('APP_USER'), 
-    V('APP_PAGE_ID'), 
-    SYSTIMESTAMP
-);
-COMMIT;
+2. Добавление записи при входе на страницу
 
-3. Логирование выхода со страницы
+В каждом приложении APEX есть возможность автоматически запускать процесс перед загрузкой страницы. Для этого:
 
-Используйте динамическое действие на событие apexbeforerefresh или apexpagesubmit:
-
-1. Создайте динамическое действие на уровне страницы.
+1. Перейдите в Shared Components → Application Processes.
 
 
-2. В качестве события выберите "Custom Event" и используйте apexbeforerefresh или apexpagesubmit.
+2. Создайте новый процесс "Log Page Entry" и установите "Point" = "On Load: Before Header".
 
 
-3. В разделе True Actions добавьте "Execute PL/SQL Code":
+3. Вставьте следующий код:
 
 
 
-UPDATE APEX_PAGE_ACCESS_LOG 
-SET exit_time = SYSTIMESTAMP 
-WHERE session_id = V('APP_SESSION') 
-  AND page_id = V('APP_PAGE_ID') 
-  AND exit_time IS NULL;
-COMMIT;
+BEGIN
+    INSERT INTO APEX_PAGE_ACCESS_LOG (session_id, user_name, page_id, access_time)
+    VALUES (
+        V('APP_SESSION'), 
+        V('APP_USER'), 
+        V('APP_PAGE_ID'), 
+        SYSTIMESTAMP
+    );
+    COMMIT;
+END;
 
-4. Дополнительная автоматизация
+Этот код добавит запись при каждом заходе пользователя на страницу.
 
-Можно создать автоматический процесс по очистке логов или добавлению аналитики.
 
-Пример запроса для получения отчетов:
+---
+
+3. Запись времени выхода со страницы
+
+Чтобы записывать время выхода, используем динамическое действие:
+
+1. Откройте любую страницу и перейдите в Page Designer.
+
+
+2. Добавьте Dynamic Action с триггером "Page Unload".
+
+
+3. В разделе True Actions добавьте "Execute PL/SQL Code" и вставьте код:
+
+
+
+BEGIN
+    UPDATE APEX_PAGE_ACCESS_LOG
+    SET exit_time = SYSTIMESTAMP
+    WHERE session_id = V('APP_SESSION') 
+      AND page_id = V('APP_PAGE_ID') 
+      AND exit_time IS NULL;
+    COMMIT;
+END;
+
+4. Установите "Fire On Page Load" = No и "Fire on Initialization" = No.
+
+
+
+
+---
+
+4. Проверка логов
+
+Теперь можно проверить, кто и когда заходил на страницы:
 
 SELECT user_name, page_id, access_time, exit_time,
        ROUND((exit_time - access_time) * 24 * 60, 2) AS minutes_spent
 FROM APEX_PAGE_ACCESS_LOG
-WHERE access_time >= SYSDATE - 7  -- Лог за последние 7 дней
 ORDER BY access_time DESC;
 
-5. Альтернативный вариант с JavaScript
 
-Если нужно записывать точное время выхода (например, при закрытии браузера), добавьте следующий код в "Execute JavaScript Code":
+---
 
-window.addEventListener('beforeunload', function() {
-    apex.server.process("LOG_EXIT", {
-        x01: apex.pageContext.pageId
-    });
-});
+Дополнительно
 
-В APEX создайте On Demand процесс "LOG_EXIT":
+Можно добавить отчет в APEX для визуального просмотра логов.
 
-UPDATE APEX_PAGE_ACCESS_LOG
-SET exit_time = SYSTIMESTAMP
-WHERE session_id = V('APP_SESSION') 
-  AND page_id = APEX_APPLICATION.G_X01
-  AND exit_time IS NULL;
-COMMIT;
+Можно создать автоматический процесс очистки старых данных раз в неделю.
 
-Заключение
 
-Этот метод позволит вам отслеживать, кто, когда и сколько времени провел на каждой странице в Oracle APEX. Вы можете интегрировать этот механизм с отчетами или дашбордами для анализа пользовательского поведения.
+Теперь логи посещений страниц автоматически фиксируются без использования системных таблиц APEX!
 
