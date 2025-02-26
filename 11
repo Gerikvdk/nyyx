@@ -1,38 +1,27 @@
-DECLARE
-  v_page_group VARCHAR2(100);
-  v_result NUMBER;
 BEGIN
-  -- Получаем группу текущей страницы
-  SELECT PAGE_GROUP 
-  INTO v_page_group 
-  FROM APEX_APPLICATION_PAGES 
-  WHERE APPLICATION_ID = :APP_ID 
-    AND PAGE_ID = :APP_PAGE_ID;
+    -- Проверяем, есть ли уже открытая запись для этой сессии и страницы
+    DECLARE 
+        v_count NUMBER;
+    BEGIN
+        SELECT COUNT(*) INTO v_count 
+        FROM APEX_PAGE_ACCESS_LOG
+        WHERE session_id = V('APP_SESSION')
+          AND page_id = V('APP_PAGE_ID')
+          AND log_status = 'ACTIVE';
 
-  -- Если страница в группе 'user interface', просто завершаем выполнение
-  IF v_page_group = 'user interface' THEN
-    RETURN;
-  END IF;
+        -- Если запись есть, закрываем её, прежде чем создать новую
+        IF v_count > 0 THEN
+            UPDATE APEX_PAGE_ACCESS_LOG
+            SET exit_time = SYSTIMESTAMP, log_status = 'CLOSED'
+            WHERE session_id = V('APP_SESSION')
+              AND page_id = V('APP_PAGE_ID')
+              AND log_status = 'ACTIVE';
+            COMMIT;
+        END IF;
 
-  -- Если страница не в 'dashboard', сразу перенаправляем на 1020
-  IF v_page_group != 'dashboard' THEN
-    APEX_UTIL.REDIRECT_URL('f?p=&APP_ID.:1020:&SESSION.');
-    RETURN;
-  END IF;
-
-  -- Выполняем проверочный запрос, если страница в 'dashboard'
-  BEGIN
-    SELECT CHECK_AUTH_SEQUENCE(
-      p_app_user => :APP_USER,
-      p_page_id => :APP_PAGE_ID
-    ) INTO v_result FROM DUAL;
-
-    -- Если результат NULL, перенаправляем на 1020
-    IF v_result IS NULL THEN
-      APEX_UTIL.REDIRECT_URL('f?p=&APP_ID.:1020:&SESSION.');
-    END IF;
-  EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-      APEX_UTIL.REDIRECT_URL('f?p=&APP_ID.:1020:&SESSION.');
-  END;
+        -- Создаем новую запись
+        INSERT INTO APEX_PAGE_ACCESS_LOG (session_id, user_name, page_id, access_time, log_status)
+        VALUES (V('APP_SESSION'), V('APP_USER'), V('APP_PAGE_ID'), SYSTIMESTAMP, 'ACTIVE');
+        COMMIT;
+    END;
 END;
