@@ -1,119 +1,175 @@
-Ниже приведён пример простой адаптивной вёрстки на HTML/CSS (без шапки и подвала), которая повторяет расположение блоков, похожее на то, что видно на скриншоте. При сужении экрана элементы плавно перестраиваются в столбцы.
+Ниже пример верстки «один в один», максимально похожей на макет со скриншота (только основной контент — без шапки и подвала). В примере:
 
-HTML (index.html):
+1. Большой зелёный блок вверху с текстом «Для вашего удобства…».
+
+
+2. Под ним — сетка из пяти карточек (как на скриншоте), в две строки и три столбца (одна ячейка остаётся пустой).
+
+
+3. При сужении экрана карточки перестраиваются.
+
+
+
+> Важно: порядок карточек, отступы, цвета и шрифты можно подкорректировать под точные значения из макета. Ниже дан базовый вариант «один в один», который легко доработать под нужные пиксели.
+
+
+
+
+---
+
+HTML (index.html)
 
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Портал аналитики</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-  <!-- Заголовок, но не шапка сайта. Его можно просто оформить как текст -->
-  <h1 class="page-title">Добро пожаловать на Портал аналитики!</h1>
 
-  <div class="container">
-    <!-- Большой блок с зелёным фоном -->
-    <div class="main-card">
+  <!-- Основной контейнер без шапки и подвала -->
+  <div class="main-container">
+    <!-- Зелёный блок с заголовком -->
+    <div class="hero">
       <h2>Для вашего удобства дашборды<br>собраны в едином пространстве</h2>
       <p>Найти интересующий дашборд</p>
     </div>
 
-    <!-- Остальные карточки -->
-    <div class="card">О портале<br><small>Познакомиться с порталом аналитики</small></div>
-    <div class="card">Избранное<br><small>Посмотреть сохранённые дашборды</small></div>
-    <div class="card">Статистика<br><small>Узнать о портале в цифрах</small></div>
-    <div class="card">Обратная связь<br><small>Запросить консультацию по дашборду</small></div>
-    <div class="card">Разработка<br><small>Протестировать новые дашборды</small></div>
+    <!-- Сетка карточек -->
+    <div class="cards-container">
+      <div class="card">
+        <h3>О портале</h3>
+        <p>Познакомиться с порталом аналитики</p>
+      </div>
+      <div class="card">
+        <h3>Избранное</h3>
+        <p>Посмотреть сохранённые дашборды</p>
+      </div>
+      <div class="card">
+        <h3>Статистика</h3>
+        <p>Узнать о портале в цифрах</p>
+      </div>
+      <div class="card">
+        <h3>Обратная связь</h3>
+        <p>Запросить консультацию по дашборду</p>
+      </div>
+      <div class="card">
+        <h3>Разработка</h3>
+        <p>Протестировать новые дашборды</p>
+      </div>
+      <!-- Пустая ячейка, чтобы в сетке было ровно 2 строки и 3 столбца -->
+      <div></div>
+    </div>
   </div>
+
 </body>
 </html>
 
-CSS (styles.css):
 
-/* Сброс базовых отступов и коробочной модели */
+---
+
+CSS (styles.css)
+
+/* Сброс и коробочная модель */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Стиль страницы */
+/* Основные стили страницы */
 body {
   font-family: Arial, sans-serif;
-  background-color: #fafafa;
+  background-color: #f5f5f5; /* При необходимости меняйте */
   color: #333;
 }
 
-/* Заголовок страницы */
-.page-title {
-  text-align: center;
-  margin: 1rem 0;
-  font-size: 1.5rem;
-}
-
-/* Контейнер для всех карточек */
-.container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
+/* Контейнер для всего содержимого (без шапки и подвала) */
+.main-container {
   max-width: 1200px;
-  margin: 0 auto; /* Центрируем контейнер */
-  padding: 1rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
-/* Большая зелёная карточка */
-.main-card {
-  background-color: #28a745; 
+/* Зелёный блок с текстом */
+.hero {
+  background-color: #28a745; /* Цвет как на скриншоте */
   color: #fff;
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  /* Чтобы main-card занимал всю ширину при маленьком экране,
-     но мог растягиваться на несколько колонок при широком экране */
-  grid-column: span 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  line-height: 1.4;
 }
 
-/* Обычные карточки */
+.hero h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+}
+
+/* Сетка карточек */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 столбца */
+  gap: 1rem; /* Расстояние между карточками */
+}
+
+/* Каждая карточка */
 .card {
   background-color: #fff;
+  border-radius: 8px;
   padding: 1rem;
-  border-radius: 0.5rem;
-  min-height: 100px;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
 }
 
-/* Адаптивность: при очень узких экранах
-   пусть main-card не принудительно растягивается на 2 колонки */
-@media (max-width: 600px) {
-  .main-card {
-    grid-column: span 1;
+/* Заголовок и текст в карточке */
+.card h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+/* Адаптив: на планшетах по 2 столбца */
+@media (max-width: 768px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-Как это работает:
-
-1. Используем CSS Grid с правилом
-
-grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-
-чтобы карточки автоматически перестраивались в зависимости от ширины экрана. Каждая «колонка» имеет минимальную ширину 280px и может растягиваться до 1fr (занимает доступное пространство).
-
-
-2. Класс .main-card растягивается на две колонки благодаря grid-column: span 2;, но при экранах уже 600px срабатывает медиазапрос и убирает это правило (чтобы блок не оставался слишком широким на мобильных устройствах).
+/* Адаптив: на телефонах по 1 столбцу */
+@media (max-width: 480px) {
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+}
 
 
-3. При необходимости вы можете менять размеры, отступы и цвета под свой макет.
+---
+
+Как подогнать «1 в 1» под ваш макет
+
+1. Шрифты и размеры: при необходимости поменяйте font-size, line-height и padding в .hero и .card.
+
+
+2. Отступы и тени: подкорректируйте gap, margin-bottom, box-shadow.
+
+
+3. Цвета: замените #28a745, #f5f5f5 и т.д. на точные цвета из макета.
 
 
 
-Таким образом вы получаете адаптивную (резиновую) вёрстку без отдельного хедера и футера, но с сохранением структуры и иерархии элементов из предоставленного скриншота.
+Таким образом, вы получите максимально похожую на скриншот адаптивную вёрстку без отдельной «шапки» и «подвала». При сужении экрана блоки будут перестраиваться в две и одну колонку соответственно.
 
