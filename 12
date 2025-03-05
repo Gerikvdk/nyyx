@@ -1,3 +1,18 @@
+
+document.getElementById('myIframe').onload = function() {
+       var iframe = document.getElementById('myIframe');
+       var iframeWindow = iframe.contentWindow || iframe.contentDocument.defaultView;
+
+       // Проверяем, произошел ли редирект
+       if (iframeWindow.location.href !== iframe.src) {
+           // Обновляем src iframe на новый URL
+           iframe.src = iframeWindow.location.href;
+       }
+   };
+
+
+
+
 <!-- Заголовок в центре -->
   <h1 class="page-title">Добро пожаловать на Портал аналитики!</h1>
 
