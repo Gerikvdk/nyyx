@@ -1,31 +1,48 @@
-$(document).ready(function() {
-    var iframe = $('#customIframe');
-    var errorMessage = $('#iframeErrorMessage');
+В Oracle APEX 23.1 можно перехватить редирект на новую вкладку в iframe с помощью JavaScript, используя MutationObserver или перехват событий window.open. Вот один из возможных способов:
 
-    // Обработчик успешной загрузки iframe
-    iframe.on('load', function() {
-        // Для кросс-доменных iframe проверка содержимого может не сработать
-        try {
-            if (iframe.contents().length === 0) {
-                throw new Error('Пустой контент');
+Решение через MutationObserver:
+
+Этот код отслеживает изменения атрибута src у iframe и заменяет его значением ссылки:
+
+document.addEventListener("DOMContentLoaded", function () {
+    let iframe = document.getElementById("my_iframe"); // Замените на свой ID
+    let observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === "src") {
+                console.log("Изменен src:", iframe.src);
             }
-        } catch (e) {
-            errorMessage.show();
-            iframe.hide();
-        }
+        });
     });
-
-    // Обработчик ошибки загрузки iframe
-    iframe.on('error', function() {
-        errorMessage.show();
-        iframe.hide();
-    });
-
-    // Таймаут на случай, если iframe не ответил
-    setTimeout(function() {
-        if (iframe.is(':visible')) {
-            errorMessage.show();
-            iframe.hide();
-        }
-    }, 5000); // Таймаут 5 секунд
+    
+    observer.observe(iframe, { attributes: true });
 });
+
+Перехват window.open:
+
+Если редирект происходит через window.open, можно заменить его на изменение src у iframe:
+
+window.open = function (url, target, features) {
+    let iframe = document.getElementById("my_iframe"); // Замените на свой ID
+    if (iframe) {
+        iframe.src = url;
+    } else {
+        return window.open(url, "_self", features);
+    }
+};
+
+Если редирект выполняется с target="_blank", можно перехватить клики на ссылки и заменить target:
+
+document.addEventListener("click", function (e) {
+    let link = e.target.closest("a");
+    if (link && link.target === "_blank") {
+        e.preventDefault();
+        let iframe = document.getElementById("my_iframe");
+        if (iframe) {
+            iframe.src = link.href;
+        }
+    }
+});
+
+Итог
+
+Выбирайте подходящий метод в зависимости от того, как выполняется редирект.
